@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { TrendingUp } from 'lucide-react';
+import { TrendingUp, ChevronDownIcon } from 'lucide-react';
 import { useData } from "@/context/Data"
 
 import { cn } from "@/lib/utils"
@@ -27,6 +27,12 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
+import { Calendar } from "@/components/ui/calendar"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
@@ -105,6 +111,8 @@ function ProfileForm({ className, onFinish }: ProfileFormProps) {
   });
   const [showError, setShowerror] = React.useState(false);
   const { activePortfolio, addTradeToPortfolio } = useData();
+  const [open, setOpen] = React.useState(false)
+  const [date, setDate] = React.useState<Date | undefined>(undefined)
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -148,7 +156,33 @@ function ProfileForm({ className, onFinish }: ProfileFormProps) {
       </div>
       <div className="grid gap-3">
         <Label htmlFor="date">Date</Label>
-        <Input id="date" onChange={(a) => setTradeData({ ...tradeData, date: a.target.value})} />
+        {/* <Input id="date" onChange={(a) => setTradeData({ ...tradeData, date: a.target.value})} /> */}
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              id="date"
+              className=" justify-between font-normal"
+            >
+              {date ? date.toLocaleDateString() : "Select date"}
+              <ChevronDownIcon />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto overflow-hidden p-0" align="start">
+            <Calendar
+              mode="single"
+              selected={date}
+              captionLayout="dropdown"
+              onSelect={(selectedDate) => {
+                if (selectedDate) {
+                  setTradeData({ ...tradeData, date: new Date(selectedDate).toISOString().split('T')[0]});
+                  setDate(selectedDate);
+                  setOpen(false);
+                }
+              }}
+            />
+          </PopoverContent>
+        </Popover>
       </div>
       <div className="grid gap-3">
         <Label htmlFor="entryPrice">Entry Price</Label>

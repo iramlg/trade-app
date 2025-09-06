@@ -1,17 +1,13 @@
 "use client"
 
 import { DollarSign } from 'lucide-react';
-import { NewTrade } from "@/components/ui/newTrade"
+import { NewTrade } from "@/components/newTrade"
 import { useData } from "@/context/Data"
+import { usdFormatter } from "@/lib/utils"
 
 export function PortfolioWealth() {
   const { data, activePortfolio } = useData();
   const { portfolios } = data!;
-
-  const usdFormatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD'
-  });
 
   if (!activePortfolio) {
     return null;

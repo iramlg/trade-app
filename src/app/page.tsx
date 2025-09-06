@@ -1,7 +1,7 @@
-import { NewPortfolio } from "@/components/ui/newPortforlio"
-import { PortfolioWealth } from "@/components/ui/porfolioWealth"
-import { SelectPortfolio } from "@/components/ui/selectPortfolio"
-import { TradeList } from "@/components/ui/tradeList"
+import { NewPortfolio } from "@/components/newPortforlio"
+import { PortfolioWealth } from "@/components/porfolioWealth"
+import { SelectPortfolio } from "@/components/selectPortfolio"
+import { TradeList } from "@/components/tradeList"
 
 export default function Home() {
 

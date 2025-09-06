@@ -8,6 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { useData } from "@/context/Data"
+import { usdFormatter } from "@/lib/utils"
 
 const thClass = 'px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider';
 const tdClass = 'px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900';
@@ -15,11 +16,6 @@ const tdClass = 'px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900'
 export function TradeList() {
   const { data, activePortfolio } = useData();
   const { portfolios } = data!;
-
-  const usdFormatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD'
-  });
 
   if (!activePortfolio) {
     return null;

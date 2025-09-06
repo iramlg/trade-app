@@ -156,7 +156,6 @@ function ProfileForm({ className, onFinish }: ProfileFormProps) {
       </div>
       <div className="grid gap-3">
         <Label htmlFor="date">Date</Label>
-        {/* <Input id="date" onChange={(a) => setTradeData({ ...tradeData, date: a.target.value})} /> */}
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <Button
